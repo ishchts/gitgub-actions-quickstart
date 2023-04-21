@@ -9,7 +9,7 @@ jobs:
       - name: Print GitHub Context
         run: |
           echo "GitHub Context:"
-          echo "\${{ toJson(github) }}"
+          echo "${{ github }}"
       - name: Print Secrets
         env:
           MY_SECRET: ${{ secrets.MY_SECRET }}
