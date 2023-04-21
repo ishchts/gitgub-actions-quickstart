@@ -6,12 +6,16 @@ jobs:
   my-job:
     runs-on: ubuntu-latest
     steps:
-      - name: List files
-        run: ls
-      - name: pwd
-        run: pwd
-      - name: change dir
-        run: cd /home
-      - name: ls after change dir
-        run: ls
+      - name: github
+        run: ${{ github }}
+      - name: secrets
+        run: ${{ secrets }}
+      - name: matrix
+        run: ${{ matrix }}
+      - name: steps
+        run: ${{ steps }}
+      - name: env
+        run: ${{ env }}
+      - name: outputs
+        run: ${{ outputs }}
         
