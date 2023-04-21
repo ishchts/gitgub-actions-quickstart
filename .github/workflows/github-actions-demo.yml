@@ -6,16 +6,36 @@ jobs:
   my-job:
     runs-on: ubuntu-latest
     steps:
-      - name: github
-        run: ${{ github }}
-      - name: secrets
-        run: ${{ secrets }}
-      - name: matrix
-        run: ${{ matrix }}
-      - name: steps
-        run: ${{ steps }}
-      - name: env
-        run: ${{ env }}
-      - name: outputs
-        run: ${{ outputs }}
-        
+      - name: Print GitHub Context
+        run: |
+          echo "GitHub Context:"
+          echo "${{ toJson(github) }}"
+      - name: Print Secrets
+        env:
+          MY_SECRET: ${{ secrets.MY_SECRET }}
+        run: |
+          echo "Secrets:"
+          echo "${{ env.MY_SECRET }}"
+      - name: Print Matrix
+        run: |
+          echo "Matrix:"
+          echo "${{ toJson(matrix) }}"
+      - name: Print Steps
+        run: |
+          echo "Steps:"
+          echo "${{ toJson(steps) }}"
+      - name: Print Env
+        env:
+          MY_ENV_VAR: "Hello World"
+        run: |
+          echo "Env:"
+          echo "${{ toJson(env) }}"
+      - name: Print Outputs
+        id: my_output
+        run: |
+          echo "Outputs:"
+          echo "::set-output name=my_output::Hello World"
+      - name: Print Output Value
+        run: |
+          echo "Output Value:"
+          echo "${{ steps.my_output.outputs.my_output }}"
