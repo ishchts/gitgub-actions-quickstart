@@ -1,4 +1,5 @@
 name: Link, test and build
+on: ['push']
 jobs:
   run-on: ubuntu-latest
   steps:
