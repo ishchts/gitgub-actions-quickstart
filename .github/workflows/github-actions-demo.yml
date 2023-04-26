@@ -1,5 +1,4 @@
 name: Link, test and build
-on: push
 jobs:
   build222:
       runs-on: ubuntu-latest
