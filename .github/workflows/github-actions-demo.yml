@@ -1,37 +1,11 @@
-name: My Workflow
-
-on: push
-
+name: Link, test and build
 jobs:
-  my-job:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Print GitHub Context
-        run: |
-          echo "GitHub Context:"
-          echo "${{ toJson(github) }}"
-      - name: Print Secrets
-        env:
-          MY_SECRET: ${{ secrets.MY_SECRET }}
-        run: |
-          echo "Secrets:"
-          echo "${{ env.MY_SECRET }}"
-      - name: Print Steps
-        run: |
-          echo "Steps:"
-          echo "${{ toJson(steps) }}"
-      - name: Print Env
-        env:
-          MY_ENV_VAR: "Hello World"
-        run: |
-          echo "Env:"
-          echo "${{ toJson(env) }}"
-      - name: Print Outputs
-        id: my_output
-        run: |
-          echo "Outputs:"
-          echo "::set-output name=my_output::Hello World"
-      - name: Print Output Value
-        run: |
-          echo "Output Value:"
-          echo "${{ steps.my_output.outputs.my_output }}"
+  run-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v3
+    - name: vot lint
+      run: npx eslint ./src
+    - name: teper test
+      run: npm test
+    - name: teper build
+      run: npm run build
