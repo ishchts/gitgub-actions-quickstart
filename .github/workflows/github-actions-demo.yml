@@ -1,37 +1,21 @@
-name: My Workflow
-
+name: Lint, test, build
 on: push
-
 jobs:
-  my-job:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Print GitHub Context
-        run: |
-          echo "GitHub Context:"
-          echo "${{ toJson(github) }}"
-      - name: Print Secrets
-        env:
-          MY_SECRET: ${{ secrets.MY_SECRET }}
-        run: |
-          echo "Secrets:"
-          echo "${{ env.MY_SECRET }}"
-      - name: Print Steps
-        run: |
-          echo "Steps:"
-          echo "${{ toJson(steps) }}"
-      - name: Print Env
-        env:
-          MY_ENV_VAR: "Hello World"
-        run: |
-          echo "Env:"
-          echo "${{ toJson(env) }}"
-      - name: Print Outputs
-        id: my_output
-        run: |
-          echo "Outputs:"
-          echo "::set-output name=my_output::Hello World"
-      - name: Print Output Value
-        run: |
-          echo "Output Value:"
-          echo "${{ steps.my_output.outputs.my_output }}"
+      - uses: actions/checkout@v3
+      - name: install
+        run: npm install
+      - name: Lint
+        run: npx eslint ./src
+      - name: test
+        run: npm test
+      - name: build
+        run: npm run build
+      - uses: actions/upload-artifact@v3
+        with:
+          name: build-dir
+          path: ./build
+
+  
