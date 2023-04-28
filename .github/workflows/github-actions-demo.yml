@@ -5,6 +5,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: dumb branch
+        run: ${{ github.ref }}
       - name: install dependencies
         run: npm ci
       - name: Lint
