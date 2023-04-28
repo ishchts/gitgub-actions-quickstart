@@ -8,7 +8,7 @@ jobs:
       - name: dumb branch
         run: echo ${{ github.ref }}
       - name: echo VARIABLE_1
-        run: echo ${{ toJSON(vars) }}
+        run: echo ${{ vars.VARIABLE_1 }}
       - name: echo SECRET_1
         run: echo ${{ secrets.SECRET_1 }}
       - name: install dependencies
