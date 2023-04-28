@@ -1,5 +1,7 @@
 name: Lint, test, build
 on: push
+env:
+  VARIABLE_1: ${{ vars.VARIABLE_1 }}
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -8,7 +10,7 @@ jobs:
       - name: dumb branch
         run: echo ${{ github.ref }}
       - name: echo VARIABLE_1
-        run: echo ${{ vars.VARIABLE_1 }}
+        run: echo $VARIABLE_1
       - name: echo SECRET_1
         run: echo ${{ secrets.SECRET_1 }}
       - name: install dependencies
