@@ -1,5 +1,8 @@
 name: Lint, test, build
 on: push
+env:
+  VARIABLE_1: ${{ env.VARIABLE_1 }}
+  SECRET_1: ${{ secrets.SECRET_1 }}
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -7,6 +10,10 @@ jobs:
       - uses: actions/checkout@v3
       - name: dumb branch
         run: echo ${{ github.ref }}
+      - name: echo VARIABLE_1
+        run: echo $VARIABLE_1
+      - name: echo SECRET_1
+        run: echo $SECRET_1
       - name: install dependencies
         run: npm ci
       - name: Lint
