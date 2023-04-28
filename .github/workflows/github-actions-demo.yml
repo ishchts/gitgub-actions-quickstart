@@ -6,7 +6,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: dumb branch
-        run: ${{ github.ref }}
+        run: echo ${{ github.ref }}
       - name: install dependencies
         run: npm ci
       - name: Lint
@@ -19,6 +19,7 @@ jobs:
         with:
           name: build-dir
           path: ./build
+          retention-days: 10
       - uses: actions/download-artifact@v3
         with:
           name: build-dir
